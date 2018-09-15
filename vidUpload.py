@@ -24,7 +24,7 @@ try:
     response = conn.getresponse()
     string = response.read().decode('utf-8')
     json_obj = json.loads(string)
-    print(json_obj)
+    # print(json_obj)
     accAccessToken = json_obj
     #print data is the access token
     conn.close()
@@ -46,11 +46,11 @@ params = urllib.parse.urlencode({
 
 try:
     conn = http.client.HTTPSConnection('api.videoindexer.ai')
-    conn.request("GET", "/auth/westus2/Accounts/e6dc5dac-de07-48a6-b157-91105accc78a/Videos/5f717a973e/AccessToken?%s" % params, "{body}", headers2)
+    conn.request("GET", "/auth/westus2/Accounts/e6dc5dac-de07-48a6-b157-91105accc78a/Videos/56600908f1/AccessToken?%s" % params, "{body}", headers2)
     response = conn.getresponse()
     string = response.read().decode('utf-8')
     json_obj = json.loads(string)
-    print(json_obj)
+    # print(json_obj)
     videoAccessToken = json_obj
     #print data is the access token
     conn.close()
@@ -72,15 +72,29 @@ params = urllib.parse.urlencode({
     'accessToken': accAccessToken,
     'language': 'English',
 })
+def parser(data):
+    '''
+    data is json obj
+    '''
+    data = json.loads(data)
+    #data seems to be able to be keyed into twice as dictionary, then holds lists 
+    # data['summarizedInsights']['faces'] is a list of more dictionaries that hold all of the face information (id, appearances, etc)
+    print (data['summarizedInsights']['faces'])
+
 try:
     conn = http.client.HTTPSConnection('api.videoindexer.ai')
-    conn.request("GET", "/westus2/Accounts/e6dc5dac-de07-48a6-b157-91105accc78a/Videos/5f717a973e/Index?%s" % params, "{body}", headers3)
+    conn.request("GET", "/westus2/Accounts/e6dc5dac-de07-48a6-b157-91105accc78a/Videos/56600908f1/Index?%s" % params, "{body}", headers3)
     response = conn.getresponse()
     data = response.read()
-    print(data)
+    # thing that needs to be parsed 
+    print('\n', data, '\n')
+    #other possibility for parsing
+    # data = str(data)
+    parser(data)
     conn.close()
 except Exception as e:
     print("[Errno {0}] {1}".format(e.errno, e.strerror))
+
 
 
 
