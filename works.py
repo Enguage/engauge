@@ -99,6 +99,8 @@ try:
         graphtimes[key] = []
         for dict in timestampdict[key]:
             graphtimes[key].append([dict['startSeconds'], dict['endSeconds']])
+    print(timestampdict)
+    print(graphtimes)
     # data = str(data)
     # parser(data)  # gave error so we commented out
     conn.close()
