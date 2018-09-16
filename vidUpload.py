@@ -9,12 +9,6 @@ headers1 = {
     'Ocp-Apim-Subscription-Key': '8dbcfd113c304bb4a6a31b8dcb715385'
 }
 
-params = urllib.parse.urlencode({
-    # Request parameters
-    'allowEdit': 'false',
-})
-
-
 def extractstt(data): # data a string of the json dictionary
     print("Extractstt start")
 
@@ -42,16 +36,11 @@ except Exception as e:
 
 # step 2 video access token using part 1
 
-headers2 = {
-    # Request headers
-    'Ocp-Apim-Subscription-Key': '8dbcfd113c304bb4a6a31b8dcb715385'
+# CF.face.detect(<image_file>, attributes='emotion')
 
-}
+# will return array of "face" objects with faceAttributes property that contains emotion property
 
-params = urllib.parse.urlencode({
-    # Request parameters
-    'allowEdit': 'false',
-})
+# https://github.com/Microsoft/Cognitive-Face-Python/blob/master/cognitive_face/face.py
 
 try:
     conn = http.client.HTTPSConnection('api.videoindexer.ai')
